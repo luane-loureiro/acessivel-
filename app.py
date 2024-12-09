@@ -86,7 +86,6 @@ if "chat_history" not in st.session_state:
     Faça pergunta por pergunta, não envie muitas perguntas. Seja cordial, envie emojis fofos (infantis). 
     
     """
-    # Adicionar contexto inicial e mensagem oculta
     st.session_state.chat_history.append({"role": "user", "content": context})
 
 user_input = st.text_area("Digite sua mensagem ou personalize o prompt:", key="user_input")
@@ -96,7 +95,6 @@ def add_message_to_history(role, content, hidden=False):
         if not st.session_state.chat_history or st.session_state.chat_history[-1]["role"] != role:
             st.session_state.chat_history.append({"role": role, "content": content})
     else:
-        # Mensagem oculta não é exibida na interface
         st.session_state.chat_history.append({"role": role, "content": content, "hidden": True})
 
 st.sidebar.header("Fonte de Dados")
@@ -121,7 +119,6 @@ if st.button("Enviar"):
         add_message_to_history("user", user_input)
 
         with st.spinner("Buscando resposta..."):
-            # Filtrar mensagens ocultas no payload enviado ao modelo
             model_response = call_bedrock_model(
                 [msg for msg in st.session_state.chat_history if not msg.get("hidden", False)]
             )
@@ -130,7 +127,7 @@ if st.button("Enviar"):
 
 st.subheader("Histórico do Chat")
 for message in st.session_state.chat_history:
-    if not message.get("hidden", False):  # Não exibir mensagens ocultas
+    if not message.get("hidden", False):
         if message["role"] == "user":
             st.write(f"**Usuário:** {message['content']}")
         elif message["role"] == "assistant":
