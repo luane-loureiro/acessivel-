@@ -46,7 +46,15 @@ def call_bedrock_model(messages):
 # =========================
 # Interface do Chat
 # =========================
-st.title("Chat com AWS Bedrock")
+
+# Título do app
+st.title("Acessível+ - Plataforma de Acessibilidade")
+
+# Descrição
+st.markdown("""
+Acessível+ é uma plataforma dedicada a fornecer informações precisas sobre a acessibilidade de locais e rotas para pessoas com deficiência.
+Aqui, você pode consultar informações sobre rampas, elevadores, transporte público acessível, e muito mais!
+""")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
@@ -80,13 +88,28 @@ Disponibilidade de auxiliares de apoio (como cuidadores ou intérpretes de Libra
 Iluminação adequada para deficientes visuais
 Zonas de descanso e espera acessíveis
 Áreas que aceitam cães-guia
+
+Responda usando emojis e linguagem informal
 Importante: Mantenha o foco em fornecer informações relevantes sobre acessibilidade. Evite desviar para temas não relacionados ou dar informações incorretas. Seu objetivo é ser uma fonte confiável e útil para quem busca uma experiência mais inclusiva e acessível. """
 
     st.session_state.chat_history.append({"role": "user", "content": context, "hidden": True})
 
 if 'show_chat_history' not in st.session_state: st.session_state['show_chat_history'] = True
 
-user_input = st.text_area("Digite sua mensagem ou personalize o prompt:", key="user_input")
+#user_input = st.text_area("Digite sua mensagem ou personalize o prompt:", key="user_input")
+
+# Campo de perguntas com placeholder
+user_input = st.text_input("O que você gostaria de saber sobre acessibilidade?", 
+                           placeholder="Exemplo: Onde tem rampas de acesso?")
+# Instruções para o usuário
+st.markdown("""
+    **Dúvidas comuns que você pode perguntar:**
+    - Onde tem rampas de acesso?
+    - Quais locais têm banheiros adaptados?
+    - Qual transporte público é acessível na minha região?
+    - Há alguma área com sinalização tátil?
+""")
+
 
 def add_message_to_history(role, content, hidden=False):
     if not hidden:
