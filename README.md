@@ -40,3 +40,58 @@ A utilização de IA e APIs externas possibilita não apenas encontrar locais ac
 - requests
 - pandas
 - boto3
+
+# Tutorial de Configuração do Projeto
+
+Este tutorial irá guiá-lo através das etapas para clonar um repositório Git, instalar dependências com `requirements.txt` e logar na AWS Bedrock usando suas chaves de acesso.
+
+## Passos para Configuração
+
+### 1. Clonar o Repositório
+
+Primeiro, clone o repositório desejado em sua máquina local. Use o comando abaixo no seu terminal:
+
+git clone https://github.com/usuario/repo.git
+cd repo
+
+### 2. Criar um Ambiente Virtual (Opcional, mas Recomendado)
+
+Para isolar as dependências do projeto, crie e ative um ambiente virtual:
+
+No Windows:
+python -m venv venv
+venv\Scripts\activate
+
+No macOS/Linux:
+python3 -m venv venv
+source venv/bin/activate
+
+### 3. Instalar as Dependências
+
+Com o ambiente virtual ativado, instale as dependências do projeto usando o arquivo `requirements.txt`:
+
+pip install -r requirements.txt
+
+### 4. Configurar a AWS CLI
+
+Se você ainda não configurou a AWS CLI, execute o comando abaixo para configurá-la:
+
+aws configure
+
+Insira suas chaves de acesso AWS, região padrão e formato de saída padrão.
+
+### 5. Logar no AWS Bedrock
+
+Para logar no AWS Bedrock, você precisará definir suas chaves de acesso como variáveis de ambiente:
+
+No Windows:
+setx AWS_ACCESS_KEY_ID "YOUR_ACCESS_KEY_ID"
+setx AWS_SECRET_ACCESS_KEY "YOUR_SECRET_ACCESS_KEY"
+
+No macOS/Linux:
+export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY_ID"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_ACCESS_KEY"
+
+Certifique-se de substituir `"YOUR_ACCESS_KEY_ID"` e `"YOUR_SECRET_ACCESS_KEY"` pelas suas chaves de acesso reais.
+
+## Pronto!
