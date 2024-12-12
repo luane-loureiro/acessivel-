@@ -67,7 +67,7 @@ if "chat_history" not in st.session_state:
       
     
     """
-    st.session_state.chat_history.append({"role": "user", "content": context})
+    st.session_state.chat_history.append({"role": "user", "content": context, "hidden": True})
 
 if 'show_chat_history' not in st.session_state: st.session_state['show_chat_history'] = True
 
@@ -89,7 +89,7 @@ if st.button("Enviar"):
 
         with st.spinner("Buscando resposta..."):
             model_response = call_bedrock_model(
-                [msg for msg in st.session_state.chat_history if not msg.get("hidden", False)]
+                [msg for msg in st.session_state.chat_history]
             )
 
             add_message_to_history("assistant", model_response)
