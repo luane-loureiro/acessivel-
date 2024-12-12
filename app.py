@@ -7,31 +7,6 @@ import requests
 session = boto3.Session(profile_name="iaedn")
 client = session.client('bedrock-runtime', region_name='us-west-2')
 
-# =========================
-# Função para chamada à API pública do IBGE
-# =========================
-
-def get_ibge_info(name):
-    try:
-        response = requests.get(f"https://servicodados.ibge.gov.br/api/v2/censos/nomes/{name}")
-        st.write("**Retorno Bruto da API IBGE:**")
-        st.json(response.json())
-
-        if response.status_code == 200:
-            data = response.json()
-            if data and isinstance(data, list) and "res" in data[0]:
-                name_data = data[0]
-                resumo = f"Nome: {name_data['nome']}\nLocalidade: {name_data['localidade']}\n"
-                resumo += "Frequências por período:\n"
-                for periodo in name_data["res"]:
-                    resumo += f"Período {periodo['periodo']}: {periodo['frequencia']} ocorrências\n"
-                return resumo
-            else:
-                return f"Resultado para {name}: Nenhuma informação encontrada ou formato inesperado."
-        else:
-            return f"Erro ao acessar a API do IBGE: {response.status_code}"
-    except Exception as e:
-        return f"Erro ao acessar a API do IBGE: {str(e)}"
 
 # =========================
 # Função para chamada ao AWS Bedrock
@@ -76,22 +51,25 @@ st.title("Chat com AWS Bedrock")
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
     context = """
-    O Acessível+ é uma plataforma que conecta e empodera pessoas com deficiência, permitindo que:
+    O Acessível+ é uma plataforma que conecta e empodera pessoas com deficiência (PcD), permitindo que:
     Avaliem, localizem e compartilhem informações sobre locais  acessíveis.
     Consultem rotas (locais) adaptados e dados atualizados sobre 	acessibilidade em tempo real.
     
 
     *Prompt*: "Você é um assistente especializado em acessibilidade para pessoas com mobilidade reduzida e CPD.
+    Tente responder de maneira mais humanizada e acessível para o usuário, incluindo emojis e usando uma linguagem informal.
       Sua tarefa é analisar as informações fornecidas sobre localidades e identificar as melhores opções 
       com base em critérios de acessibilidade,
         como rampas, elevadores, banheiros adaptados, estacionamento reservado, 
         transporte público acessível, aviso sonoro para pedestres, acessibilidade para autistas, apoio de comunição não verbal
           e outras facilidades voltadas para inclusão."
       ---nao induza o usuario ao erro, falando sobre coisas nao relacionadas ao contexto fornecido.---
-      Tente responder de maneira mais humanizada e acessível para o usuário, incluindo emojis e usando uma linguagem informal.
+      
     
     """
     st.session_state.chat_history.append({"role": "user", "content": context})
+
+if 'show_chat_history' not in st.session_state: st.session_state['show_chat_history'] = True
 
 user_input = st.text_area("Digite sua mensagem ou personalize o prompt:", key="user_input")
 
@@ -102,22 +80,8 @@ def add_message_to_history(role, content, hidden=False):
     else:
         st.session_state.chat_history.append({"role": role, "content": content, "hidden": True})
 
-st.sidebar.header("Fonte de Dados")
-uploaded_file = st.sidebar.file_uploader("Carregue um arquivo CSV", type=["csv"])
-if uploaded_file:
-    df = pd.read_csv(uploaded_file)
-    data_summary = f"Dados carregados:\n{df.head(5).to_string(index=False)}"
-    add_message_to_history("user", data_summary)
-    st.sidebar.write("**Prévia do arquivo carregado:**")
-    st.sidebar.dataframe(df)
 
-st.sidebar.header("Consulta IBGE")
-name_query = st.sidebar.text_input("Digite um nome para consultar no IBGE:")
-if st.sidebar.button("Consultar IBGE"):
-    ibge_result = get_ibge_info(name_query)
-    add_message_to_history("user", f"Resultado da API IBGE: {ibge_result}")
-    st.sidebar.write("**Resultado da API IBGE:**")
-    st.sidebar.write(ibge_result)
+
 
 if st.button("Enviar"):
     if user_input.strip():
