@@ -10,6 +10,7 @@ client = session.client('bedrock-runtime', region_name='us-west-2')
 # =========================
 # Função para chamada à API pública do IBGE
 # =========================
+
 def get_ibge_info(name):
     try:
         response = requests.get(f"https://servicodados.ibge.gov.br/api/v2/censos/nomes/{name}")
@@ -75,15 +76,19 @@ st.title("Chat com AWS Bedrock")
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
     context = """
-    Bem-vindo! Você está interagindo com o assistente da empresa SuperNanny.
-    Somos líderes em atendimento por babás.
-    Posso ajudá-lo com informações sobre nossos produtos, serviços ou outras dúvidas.
+    O Acessível+ é uma plataforma que conecta e empodera pessoas com deficiência, permitindo que:
+    Avaliem, localizem e compartilhem informações sobre locais  acessíveis.
+    Consultem rotas (locais) adaptados e dados atualizados sobre 	acessibilidade em tempo real.
+    
 
-    *Prompt*: Para bebês até 3 meses - 100,00 a hora, para bebês até 6 meses - 150 reais a hora e a partir de 1 ano - 200,00 a hora. Faça perguntas para o usuário final.
-    Como se fosse um cadastro final, induza a venda, mas tire dúvidas. Você só atende cidades de Minas Gerais e vai cobrar 1,00 a cada km de Belo Horizonte de deslocamen.
-    Pergunte o nome da pessoa, idade, quantos filhos, etc...
-
-    Faça pergunta por pergunta, não envie muitas perguntas. Seja cordial, envie emojis fofos (infantis). 
+    *Prompt*: "Você é um assistente especializado em acessibilidade para pessoas com mobilidade reduzida e CPD.
+      Sua tarefa é analisar as informações fornecidas sobre localidades e identificar as melhores opções 
+      com base em critérios de acessibilidade,
+        como rampas, elevadores, banheiros adaptados, estacionamento reservado, 
+        transporte público acessível, aviso sonoro para pedestres, acessibilidade para autistas, apoio de comunição não verbal
+          e outras facilidades voltadas para inclusão."
+      ---nao induza o usuario ao erro, falando sobre coisas nao relacionadas ao contexto fornecido.---
+      Tente responder de maneira mais humanizada e acessível para o usuário, incluindo emojis e usando uma linguagem informal.
     
     """
     st.session_state.chat_history.append({"role": "user", "content": context})
