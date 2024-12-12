@@ -170,5 +170,5 @@ for message in st.session_state.chat_history:
 st.markdown("""
 ---
 #### Acessível+ | Todos os direitos reservados.
-💬 Para mais informações, entre em contato conosco através do email: contato@acessivelplus.com
+💬 Para mais informações, entre em contato conosco através do github: https://github.com/caiocbueno/chatbot-ia-edn
 """)
