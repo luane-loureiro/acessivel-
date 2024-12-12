@@ -48,6 +48,27 @@ def call_bedrock_model(messages):
 # Interface do Chat
 # =========================
 
+# URL do logo hospedado online
+logo_url = "https://i.imgur.com/sxYtWkc.jpeg"
+
+# Exibindo o logo a partir da URL
+# HTML + CSS para centralizar o logo
+st.markdown(
+    f"""
+    <style>
+        .centered-logo {{
+            display: flex;
+            justify-content: center;
+        }}
+    </style>
+    <div class="centered-logo">
+        <img src="{logo_url}" width="200">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # Título do app
 st.title("Acessível+ - Plataforma de Acessibilidade")
 
