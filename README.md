@@ -29,6 +29,10 @@ A utilização de IA e APIs externas possibilita não apenas encontrar locais ac
 
 **Infraestrutura:** AWS Lambda, S3, e API Gateway.(Evolução Futura)
 
+<br>
+<img align="center" alt="arquitetura" height="350" src="https://github.com/user-attachments/assets/5fd0c0b8-8b0c-458b-9632-7927d821d677">
+
+
 ## 🎖️ Requerimentos, Extenções e Frameworks
 - venv
 - streamlit
