@@ -48,6 +48,10 @@ def call_bedrock_model(messages):
 # Interface do Chat
 # =========================
 
+
+
+
+
 # URL do logo hospedado online
 logo_url = "https://i.imgur.com/sxYtWkc.jpeg"
 
@@ -62,7 +66,7 @@ st.markdown(
         }}
     </style>
     <div class="centered-logo">
-        <img src="{logo_url}" width="200">
+        <img src="{logo_url}" width="500">
     </div>
     """,
     unsafe_allow_html=True
@@ -122,7 +126,7 @@ if 'show_chat_history' not in st.session_state: st.session_state['show_chat_hist
 
 # Campo de perguntas com placeholder
 user_input = st.text_input("O que você gostaria de saber sobre acessibilidade?", 
-                           placeholder="Exemplo: Onde tem rampas de acesso?")
+                          placeholder="Exemplo: Onde tem rampas de acesso?")
 # Instruções para o usuário
 st.markdown("""
     **Dúvidas comuns que você pode perguntar:**
