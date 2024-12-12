@@ -18,7 +18,7 @@ A utilização de IA e APIs externas possibilita não apenas encontrar locais ac
 
 <img height="25px" alt="Static Badge" src="https://img.shields.io/badge/Phython-E34F26?logo=python&logoColor=ffffff&labelColor=40b93c&color=40b93c&text_size=15&style=for-the-badge"> <img height="25px" alt="Static Badge" src="https://img.shields.io/badge/AWS_-_BedRock_e_CLI-1572B6?logo=AWS&logoColor=ffffff&labelColor=F7DF1E&color=F7DF1E&text_size=15&style=for-the-badge"> <img height="25" alt="Static Badge" src="https://img.shields.io/badge/GitHub-F7DF1E?logo=github&logoColor=ffffff&labelColor=e7191f&color=e7191f&text_size=15&style=for-the-badge"> <img height="25" alt="Static Badge" src="https://img.shields.io/badge/Trello-F7DF1E?logo=trello&logoColor=ffffff&labelColor=1082ce&color=1082ce&text_size=15&style=for-the-badge">
 
-## 🏗️ Arquitetura Inicail
+## 🏗️ Arquitetura Inicial
 **Linguagem:** Python
 
 **Frameworks:** Flask ou FastAPI (backend), React ou Angular (frontend). (Evolução Futura)
