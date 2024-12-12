@@ -8,6 +8,7 @@ session = boto3.Session(profile_name="iaedn")
 client = session.client('bedrock-runtime', region_name='us-west-2')
 
 
+
 # =========================
 # Função para chamada ao AWS Bedrock
 # =========================
@@ -140,3 +141,9 @@ for message in st.session_state.chat_history:
         elif message["role"] == "assistant":
             st.write(f"**Modelo:** {message['content']}")
 
+# Rodapé com informações de contato (em vermelho)
+st.markdown("""
+---
+#### Acessível+ | Todos os direitos reservados.
+💬 Para mais informações, entre em contato conosco através do email: contato@acessivelplus.com
+""")
