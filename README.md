@@ -41,7 +41,7 @@ A utilização de IA e APIs externas possibilita não apenas encontrar locais ac
 - pandas
 - boto3
 
-## .Tutorial de Configuração do Projeto
+## 📋 Tutorial de Configuração do Projeto
 
 Este tutorial irá guiá-lo através das etapas para clonar um repositório Git, instalar dependências com `requirements.txt` e logar na AWS Bedrock usando suas chaves de acesso.
 
